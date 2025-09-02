@@ -1043,11 +1043,11 @@ export class NewAgentNetwork extends MastraBase {
           path: 'task',
         },
         isComplete: {
-          step: [agentStep, workflowStep, toolStep, finishStep],
+          step: [routingStep, agentStep, workflowStep, toolStep, finishStep],
           path: 'isComplete',
         },
         completionReason: {
-          step: [routingStep, agentStep, workflowStep, toolStep, finishStep],
+          step: [agentStep, workflowStep, toolStep, finishStep],
           path: 'completionReason',
         },
         result: {
