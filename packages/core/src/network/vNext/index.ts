@@ -526,15 +526,15 @@ export class NewAgentNetwork extends MastraBase {
             });
           }
 
-          if (completionResult.object.isComplete) {
+          if (completionResult?.object?.isComplete) {
             return {
               task: inputData.task,
               resourceId: '',
               resourceType: 'none' as z.infer<typeof RESOURCE_TYPES>,
               prompt: '',
-              result: completionResult.object.finalResult,
+              result: completionResult.object?.finalResult || '',
               isComplete: true,
-              selectionReason: completionResult.object.completionReason,
+              selectionReason: completionResult.object?.completionReason || '',
               iteration: inputData.iteration + 1,
             };
           }
@@ -549,7 +549,7 @@ export class NewAgentNetwork extends MastraBase {
 
                   The user has given you the following task: 
                   ${inputData.task}
-                  ${completionResult ? `\n\n${completionResult.object.finalResult}` : ''}
+                  ${completionResult ? `\n\n${completionResult.object?.finalResult || ''}` : ''}
 
                   Please select the most appropriate primitive to handle this task and the prompt to be sent to the primitive.
                   If you are calling the same agent again, make sure to adjust the prompt to be more specific.
@@ -587,11 +587,11 @@ export class NewAgentNetwork extends MastraBase {
         return {
           task: inputData.task,
           result: '',
-          resourceId: result.object.resourceId,
-          resourceType: result.object.resourceType,
-          prompt: result.object.prompt,
-          isComplete: result.object.resourceId === 'none' && result.object.resourceType === 'none' ? true : false,
-          selectionReason: result.object.selectionReason,
+          resourceId: result?.object?.resourceId || '',
+          resourceType: result?.object?.resourceType || 'none',
+          prompt: result?.object?.prompt || '',
+          isComplete: result?.object?.resourceId === 'none' && result?.object?.resourceType === 'none' ? true : false,
+          selectionReason: result?.object?.selectionReason || '',
           iteration: inputData.iteration + 1,
         };
       },
